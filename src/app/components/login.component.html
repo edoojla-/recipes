@@ -1,12 +1,17 @@
 <div>
     <h1>Login</h1>
+    <form>
+        <input [(ngModel)]="username" name="username" placeholder="username">
+        <input [(ngModel)]="password" name="password" placeholder="password">
+    </form>
+
 
     <button class="btn btn-default" (click)="login()">
         Login
     </button>
-<!--    <button class="btn btn-default" (click)="logoff()">
-        Logout
-    </button>-->
+    <!--    <button class="btn btn-default" (click)="logoff()">
+            Logout
+        </button>-->
 
     <div>
         Username/Passwort zum Testen: joe/joe

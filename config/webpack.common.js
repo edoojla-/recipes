@@ -23,19 +23,19 @@ module: {
             loaders: ['awesome-typescript-loader', 'angular2-template-loader']
         },
         {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+        },
+        {
             test: /\.html$/,
             loader: 'html'
         },
         {
             test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
             loader: 'file?name=assets/[name].[hash].[ext]'
-        },
-        {
-           test: /\.css$/,
-           loaders: ['to-string-loader', 'css-loader']
         }
     ]},
-    
+
     plugins: [
         new ExtractTextPlugin('styles.css'),
         new webpack.optimize.CommonsChunkPlugin({

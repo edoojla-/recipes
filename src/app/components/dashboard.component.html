@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<h3>Recipes</h3>
+<div class="grid grid-pad">
+    <div *ngFor="let recipe of recipes" (click)="gotoDetail(hero)" class="col-1-4">
+        <div class="">
+            <h4>{{recipe.recipe.name}}</h4>
+        </div>
+    </div>
+</div>

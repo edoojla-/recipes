@@ -8,8 +8,6 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AccountService {
 
-    private url: string = "http://192.168.178.48:8080/oauth/token";
-
     private loggedIn = false;
 
     constructor(private http: Http) {
@@ -34,7 +32,8 @@ export class AccountService {
         params.set('username', username);
         params.set('password', password);
 
-        let accessUrl = this.url.concat("?grant_type=password")
+        let accessUrl = ("/api/oauth/token")
+            .concat("?grant_type=password")
             .concat("&username=")
             .concat(username)
             .concat("&password=")
@@ -68,7 +67,7 @@ export class AccountService {
 
 
     logout() {
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem('access_token');
         this.loggedIn = false;
     }
 

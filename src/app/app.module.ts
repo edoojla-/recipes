@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login.component';
 import { DashboardComponent } from './components/dashboard.component';
 import { AccountService } from './services/account.service';
-import {LoggedInGuard} from './services/logged-in-guard.service';
+import { LoggedInGuard } from './services/logged-in-guard.service';
+import { RecipeService } from './services/recipe.service';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import {LoggedInGuard} from './services/logged-in-guard.service';
     ],
     providers: [
         AccountService,
-        LoggedInGuard
+        LoggedInGuard,
+        RecipeService
     ],
     bootstrap: [AppComponent]
 })

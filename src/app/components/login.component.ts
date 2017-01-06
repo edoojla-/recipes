@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Headers, Http } from '@angular/http';
 import { AccountService } from '../services/account.service';
 
 import 'rxjs/add/operator/toPromise';

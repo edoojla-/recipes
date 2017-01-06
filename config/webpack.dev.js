@@ -9,7 +9,7 @@ module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-eval-source-map',
     output: {
         path: path.resolve(rootDir, 'dist'),
-        publicPath: 'http://localhost:8080/',
+        publicPath: '/',
         filename: '[name].js',
         chunkFilename: '[id].chunk.js'
     },
@@ -17,6 +17,8 @@ module.exports = webpackMerge(commonConfig, {
         new ExtractTextPlugin('[name].css')
     ],
     devServer: {
+//        host: '0.0.0.0',
+        host: '192.168.178.24',
         historyApiFallback: true,
         stats: 'minimal',
         inline: true,

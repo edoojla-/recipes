@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit {
 
     recipes: Recipe[];
 
-    constructor(private recipeService: RecipeService) { }
+    constructor(private router: Router,
+                private recipeService: RecipeService) { }
 
     ngOnInit(): void {
         this.getRecipes();
@@ -28,5 +29,9 @@ export class DashboardComponent implements OnInit {
             },
             (err) => console.log(err)
         );
+    }
+
+    gotoDetail(id: number): void {
+        this.router.navigate(['/recipe', id]);
     }
 }

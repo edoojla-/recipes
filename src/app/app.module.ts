@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AccountService } from './services/account.service';
 import { LoggedInGuard } from './services/logged-in-guard.service';
 import { RecipeService } from './services/recipe.service';
+import { RecipeIngredientService } from './services/recipe-ingredient.service';
+import { IngredientService } from './services/ingredient.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login.component';
@@ -30,7 +32,9 @@ import {RecipeComponent} from './components/recipe.component';
     providers: [
         AccountService,
         LoggedInGuard,
-        RecipeService
+        RecipeService,
+        RecipeIngredientService,
+        IngredientService
     ],
     bootstrap: [AppComponent]
 })

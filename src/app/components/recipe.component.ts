@@ -41,11 +41,6 @@ export class RecipeComponent implements OnInit {
         this.recipeForm.patchValue(this.recipe);
     }
 
-    //    save(): void {
-    //        this.recipeService.updateRecipe(this.recipe)
-    //            .then(() => this.goBack());
-    //    }
-
     save(model: Recipe, isValid: boolean): void {
         // check if model is valid
         console.log(model, isValid);

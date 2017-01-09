@@ -13,7 +13,8 @@ import { IngredientService } from './services/ingredient.service';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login.component';
 import { DashboardComponent } from './components/dashboard.component';
-import {RecipeComponent} from './components/recipe.component';
+import { RecipeComponent } from './components/recipe.component';
+import { RecipeIngredientsComponent } from './components/recipe-ingredients.component';
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import {RecipeComponent} from './components/recipe.component';
         AppComponent,
         LoginComponent,
         DashboardComponent,
-        RecipeComponent
+        RecipeComponent,
+        RecipeIngredientsComponent
     ],
     providers: [
         AccountService,

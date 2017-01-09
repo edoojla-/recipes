@@ -37,21 +37,13 @@ export class RecipeIngredientsComponent implements OnInit {
             unit: ['']
         });
 
-        this.units = ['GRAM', 'PIECE'];
+        this.units = ['', 'GRAM', 'PIECE', 'MILLILITER'];
         this.addInputValueChangeHandler();
         this.suggestBoxVisible = false;
     }
 
     ngOnInit(): void {
-        this.recipeIngredientService.getRecipeIngredients(this.recipeId).subscribe(
-            (recipeIngredients: RecipeIngredient[]) => this.recipeIngredients = recipeIngredients
-        );
-        this.ingredientService.getIngredients().subscribe(
-            (ingredients: Ingredient[]) => {
-                this.ingredients = ingredients;
-                this.suggestedIngredients = this.ingredients;
-            }
-        );
+        this.fetchUpdatedData();
     }
 
     addInputValueChangeHandler(): void {
@@ -60,7 +52,7 @@ export class RecipeIngredientsComponent implements OnInit {
                 this.suggestedIngredients = this.ingredients.filter(ingredient => ingredient.name.toLowerCase().indexOf(value.toLowerCase()) > -1);
             }
             else {
-                this.suggestedIngredients = this.ingredients;                
+                this.suggestedIngredients = this.ingredients;
             }
         });
         this.recipeIngredientsForm.controls['id'].reset();
@@ -71,11 +63,44 @@ export class RecipeIngredientsComponent implements OnInit {
         this.recipeIngredientsForm.controls['id'].setValue(ingredient.id);
     }
 
-    hideSuggestBox() : void {
+    hideSuggestBox(): void {
         setTimeout(() => this.suggestBoxVisible = false, 250);
     }
 
-    showSuggestBox() : void {
+    showSuggestBox(): void {
         setTimeout(() => this.suggestBoxVisible = true, 250);
+    }
+
+    addRecipeIngredient(formValue: any, isValid: boolean): void {
+        if (isValid) {
+            let recipeIngredient: RecipeIngredient = new RecipeIngredient();
+            let ingredient: Ingredient = new Ingredient();
+            ingredient.id = formValue.id;
+            ingredient.name = formValue.name;
+            recipeIngredient.amount = formValue.amount;
+            recipeIngredient.unit = formValue.unit;
+            recipeIngredient.ingredient = ingredient;
+            this.recipeIngredientService.addRecipeIngredient(this.recipeId, recipeIngredient).subscribe(
+                (res: any) => {
+                    this.fetchUpdatedData();
+                }
+            );
+            this.recipeIngredientsForm.controls['name'].setValue('');
+            this.recipeIngredientsForm.controls['amount'].setValue('')
+            this.recipeIngredientsForm.controls['unit'].setValue('')
+        }
+    }
+
+    private fetchUpdatedData(): void {
+        this.recipeIngredientService.getRecipeIngredients(this.recipeId).subscribe(
+            (recipeIngredients: RecipeIngredient[]) => this.recipeIngredients = recipeIngredients
+        );
+
+        this.ingredientService.getIngredients().subscribe(
+            (ingredients: Ingredient[]) => {
+                this.ingredients = ingredients;
+                this.suggestedIngredients = this.ingredients;
+            }
+        );
     }
 }

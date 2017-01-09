@@ -1,8 +1,9 @@
 <h4>Ingredients</h4>
 
-<div>
-    <form class="form-inline" [formGroup]="recipeIngredientsForm">
-        <div class="form-group suggest-input-group">
+<div class="row">
+    <form [formGroup]="recipeIngredientsForm" 
+          (ngSubmit)="addRecipeIngredient(recipeIngredientsForm.value, recipeIngredientsForm.valid)">
+          <div class="col-sm-4 form-group suggest-input-group">
             <label class="sr-only" for="ingredientNameInput">Name</label>
             <input type="text"
                    class="form-control"
@@ -15,17 +16,19 @@
                 <a *ngFor="let suggestedIngredient of suggestedIngredients" (click)="selectSuggestedIngredient(suggestedIngredient)"><div>{{suggestedIngredient.name}}</div></a>
             </div>
         </div>
-        <div class="form-group">
-            <label class="sr-only" for="ingredientAmountInput">Amount</label>
+        <div class="col-sm-3 form-group">
+             <label class="sr-only" for="ingredientAmountInput">Amount</label>
             <input type="number" class="form-control" id="ingredientAmountInput" placeholder="Amount" formControlName="amount">
         </div>
-        <div class="form-group">
-            <label class="sr-only" for="ingredientUnitInput">Unit</label>
+        <div class="col-sm-3 form-group">
+             <label class="sr-only" for="ingredientUnitInput">Unit</label>
             <select class="form-control" id="ingredientUnitInput" formControlName="unit">
                 <option *ngFor="let unit of units">{{unit}}</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-default">Add</button>
+        <div class="col-sm-2">
+            <button type="submit" class="btn btn-default">Add</button>
+        </div>
     </form>
 </div>
 

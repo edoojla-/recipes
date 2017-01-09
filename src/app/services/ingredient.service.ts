@@ -15,7 +15,16 @@ export class IngredientService {
         let headers = this.getHeaders();
         return this.http
             .get('/api/ingredient/', { headers })
-            .map((res: Response) => res.json() as Ingredient[]);
+            .map((res: Response) => res.json())
+            .map((res: any) => {
+                let result: Ingredient[] = [];
+                if (res) {
+                    for (let entry of res) {
+                        result.push(entry.ingredient);
+                    }
+                }
+                return result;
+            });
     }
 
     getIngredient(id: number): Observable<Ingredient> {

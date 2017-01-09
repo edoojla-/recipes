@@ -1,27 +1,36 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { RecipeIngredient } from '../models/recipe-ingredient'
+import {RecipeIngredient} from '../models/recipe-ingredient'
 
 @Injectable()
 export class RecipeIngredientService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) {}
 
     getRecipeIngredients(recipeId: number): Observable<RecipeIngredient[]> {
         let headers = this.getHeaders();
         return this.http
-            .get(('/api/recipeIngredient/recipe/').concat(recipeId.toString()), { headers })
-            .map((res: Response) => res.json() as RecipeIngredient[]);
+            .get(('/api/recipeIngredient/recipe/').concat(recipeId.toString()), {headers})
+            .map((res: Response) => res.json())
+            .map((res: any) => {
+                let result: RecipeIngredient[] = [];
+                if (res) {
+                    for (let entry of res) {
+                        result.push(entry.recipeIngredient);
+                    }
+                }
+                return result;
+            });
     }
 
     getRecipeIngredient(id: number): Observable<RecipeIngredient> {
         let headers = this.getHeaders();
         return this.http
-            .get(('/api/recipeIngredient/').concat(id.toString()), { headers })
+            .get(('/api/recipeIngredient/').concat(id.toString()), {headers})
             .map((res: Response) => res.json().recipeIngredient as RecipeIngredient);
     }
 
@@ -31,7 +40,7 @@ export class RecipeIngredientService {
             .post(
             ('/api/recipeIngredient/').concat(recipeId.toString()).concat("/add"),
             JSON.stringify(recipeIngredient),
-            { headers })
+            {headers})
             .map((result: any) => {
                 if (result && result.status === 201) {
                     return true;
@@ -44,7 +53,7 @@ export class RecipeIngredientService {
         return this.http
             .delete(
             ('/api/recipeIngredient/').concat(recipeIngredientId.toString()),
-            { headers })
+            {headers})
             .map((result: any) => {
                 if (result && result.status === 201) {
                     return true;

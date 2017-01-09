@@ -1,3 +1,23 @@
 my-dashboard table a {
     cursor: pointer;
 }
+
+.suggest-input-group {
+    position: relative;
+}
+
+.suggest-box {
+    position: absolute;
+    z-index: 20;
+    background: white;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.suggest-box a {
+    cursor: pointer;
+}
+
+.suggest-box div {
+    padding: 6px 12px;
+}

@@ -21,3 +21,7 @@ my-dashboard table a {
 .suggest-box div {
     padding: 6px 12px;
 }
+
+my-recipe-ingredients span.glyphicon {
+    cursor: pointer;
+}

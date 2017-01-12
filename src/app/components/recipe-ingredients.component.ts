@@ -31,6 +31,7 @@ export class RecipeIngredientsComponent implements OnInit {
         private ingredientService: IngredientService,
         private formBuilder: FormBuilder) {
         this.recipeIngredientsForm = this.formBuilder.group({
+            recipeIngredientId: [''],
             name: [''],
             id: [''],
             amount: [''],
@@ -71,24 +72,47 @@ export class RecipeIngredientsComponent implements OnInit {
         setTimeout(() => this.suggestBoxVisible = true, 250);
     }
 
-    addRecipeIngredient(formValue: any, isValid: boolean): void {
+    saveRecipeIngredient(formValue: any, isValid: boolean): void {
         if (isValid) {
             let recipeIngredient: RecipeIngredient = new RecipeIngredient();
             let ingredient: Ingredient = new Ingredient();
             ingredient.id = formValue.id;
             ingredient.name = formValue.name;
+            recipeIngredient.id = formValue.recipeIngredientId;
             recipeIngredient.amount = formValue.amount;
             recipeIngredient.unit = formValue.unit;
             recipeIngredient.ingredient = ingredient;
-            this.recipeIngredientService.addRecipeIngredient(this.recipeId, recipeIngredient).subscribe(
-                (res: any) => {
-                    this.fetchUpdatedData();
-                }
-            );
+            if (recipeIngredient.id) {
+                this.recipeIngredientService.updateRecipeIngredient(recipeIngredient).subscribe(
+                    (res: any) => {
+                        this.fetchUpdatedData();
+                    }
+                );
+            } else {
+                this.recipeIngredientService.addRecipeIngredient(this.recipeId, recipeIngredient).subscribe(
+                    (res: any) => {
+                        this.fetchUpdatedData();
+                    }
+                );
+            }
             this.recipeIngredientsForm.controls['name'].setValue('');
             this.recipeIngredientsForm.controls['amount'].setValue('')
             this.recipeIngredientsForm.controls['unit'].setValue('')
         }
+    }
+
+    editRecipeIngredient(recipeIngredient: RecipeIngredient): void {
+        this.recipeIngredientsForm.patchValue(recipeIngredient);
+        this.recipeIngredientsForm.patchValue(recipeIngredient.ingredient);
+        this.recipeIngredientsForm.controls['recipeIngredientId'].setValue(recipeIngredient.id);
+    }
+
+    deleteRecipeIngredient(recipeIngredientId: number): void {
+        this.recipeIngredientService.deleteRecipeIngredient(recipeIngredientId).subscribe(
+            (res: any) => {
+                this.fetchUpdatedData();
+            }
+        );
     }
 
     private fetchUpdatedData(): void {

@@ -48,6 +48,20 @@ export class RecipeIngredientService {
             });
     }
 
+    updateRecipeIngredient(recipeIngredient: RecipeIngredient): Observable<any> {
+        let headers = this.getHeaders();
+        return this.http
+            .put(
+            ('/api/recipeIngredient/').concat(recipeIngredient.id.toString()),
+            JSON.stringify(recipeIngredient),
+            {headers})
+            .map((result: any) => {
+                if (result && result.status === 201) {
+                    return true;
+                }
+            });
+    }
+
     deleteRecipeIngredient(recipeIngredientId: number): Observable<any> {
         let headers = this.getHeaders();
         return this.http

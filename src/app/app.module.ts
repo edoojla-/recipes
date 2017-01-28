@@ -17,19 +17,19 @@ import { RecipeComponent } from './components/recipe.component';
 import { RecipeIngredientsComponent } from './components/recipe-ingredients.component';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpModule,
-        FormsModule,
-        ReactiveFormsModule
-    ],
     declarations: [
         AppComponent,
         LoginComponent,
         DashboardComponent,
         RecipeComponent,
         RecipeIngredientsComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         AccountService,

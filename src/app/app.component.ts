@@ -4,17 +4,18 @@ import { AccountService } from './services/account.service';
 import '../assets/css/styles.css';
 
 @Component({
-    selector: 'my-app',
-    templateUrl: './app.component.html'
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 
 export class AppComponent {
     constructor(private accountService: AccountService) { }
-    
+
     isLoggedIn(): boolean {
         return this.accountService.isLoggedIn();
     }
-    
+
     logout(): void {
         this.accountService.logout();
     }

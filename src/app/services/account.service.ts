@@ -1,6 +1,7 @@
-import { Injectable }    from '@angular/core';
-import { Headers, Http, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable}    from '@angular/core';
+import {Headers, Http, URLSearchParams} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
@@ -42,7 +43,7 @@ export class AccountService {
         return this.http.post(
             accessUrl,
             {},
-            { headers }
+            {headers}
         )
             .map((result: any) => {
                 if (result && result.status === 200) {
@@ -55,14 +56,7 @@ export class AccountService {
                 this.loggedIn = true;
                 return true;
             })
-            .catch((error: any) => {
-                if (error.status === 500) {
-                    return Observable.throw(new Error(error.json().error + ' ' + error.json().error_description));
-                }
-                else if (error.status === 400) {
-                    return Observable.throw(new Error(error.json().error + ' ' + error.json().error_description));
-                }
-            });
+            .catch((error: any) => this.handleError(error));
     }
 
 
@@ -73,5 +67,15 @@ export class AccountService {
 
     isLoggedIn() {
         return this.loggedIn;
+    }
+
+    handleError(error) {
+        let errorMessage = "Uninitialized";
+        if (error.status) {
+            errorMessage = error.status;
+        } else {
+            errorMessage = error.json() || 'Server error';
+        }
+        return Observable.throw(new Error(errorMessage));
     }
 }

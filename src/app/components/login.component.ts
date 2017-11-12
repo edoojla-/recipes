@@ -11,21 +11,29 @@ import 'rxjs/add/operator/toPromise';
 
 export class LoginComponent {
 
-    username = "";
+    error: string;
 
-    password = "";
+    loading = false;
+
+    username = "joe";
+    password = "joe";
 
     constructor(private accountService: AccountService,
         private router: Router) { }
 
     login(): void {
+        this.loading = true;
         this.accountService.login(this.username, this.password).subscribe(
             (result) => {
                 if (result) {
+                    this.loading = false;
                     this.router.navigate(['dashboard']);
                 }
             },
-            (err) => console.log(err)
+            (err) => {
+                this.error = err;
+                this.loading = false;
+            }
         );
     }
 }

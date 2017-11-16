@@ -10,6 +10,9 @@ import '../assets/css/styles.css';
 })
 
 export class AppComponent {
+
+    title = 'NinJo Recipe Manager';
+
     constructor(private accountService: AccountService) { }
 
     isLoggedIn(): boolean {

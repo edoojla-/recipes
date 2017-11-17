@@ -2,9 +2,16 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
 
+This project uses <br />
+* `$ npm --version`<br />
+`5.5.1`<br />
+* `$node --version`<br />
+`v8.9.1`
+* `$ ng --version`<br />
+`Angular CLI: 1.5.2`
+
 ## Development server
-Run `ng serve --proxy-config proxy.conf.json` for a dev server connecting to a backend via a configured proxy.<br />
-Alternatively run `npm start` which does the same.<br />
+Run `npm start` for a dev server connecting to a backend via a configured proxy.<br />
 Navigate to `http://localhost:4200/`.<br />
 The app will automatically reload if you change any of the source files.
 

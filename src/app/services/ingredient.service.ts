@@ -1,21 +1,20 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { Ingredient } from '../models/ingredient'
+import {Ingredient} from '../models/ingredient'
 
 @Injectable()
 export class IngredientService {
 
-    constructor(private http: Http) { }
+    constructor(private httpClient: HttpClient) {
+    }
 
     getIngredients(): Observable<Ingredient[]> {
-        let headers = this.getHeaders();
-        return this.http
-            .get('/api/ingredient/', { headers })
-            .map((res: Response) => res.json())
+        return this.httpClient
+            .get('/api/ingredient/')
             .map((res: any) => {
                 let result: Ingredient[] = [];
                 if (res) {
@@ -28,32 +27,21 @@ export class IngredientService {
     }
 
     getIngredient(id: number): Observable<Ingredient> {
-        let headers = this.getHeaders();
-        return this.http
-            .get(('/api/ingredient/').concat(id.toString()), { headers })
-            .map((res: Response) => res.json().ingredient as Ingredient);
+        return this.httpClient
+            .get(('/api/ingredient/').concat(id.toString()))
+            .map((res: any) => res.ingredient as Ingredient);
     }
 
     createIngredient(ingredient: Ingredient): Observable<any> {
-        let headers = this.getHeaders();
-        return this.http
+        return this.httpClient
             .post(
-            '/api/ingredient/',
-            JSON.stringify(ingredient),
-            { headers })
+                '/api/ingredient/',
+                JSON.stringify(ingredient))
             .map((result: any) => {
                 if (result && result.status === 201) {
                     return true;
                 }
             });
-    }
-
-    getHeaders(): Headers {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let authToken = localStorage.getItem('access_token');
-        headers.append('Authorization', `Bearer ${authToken}`);
-        return headers;
     }
 
 }

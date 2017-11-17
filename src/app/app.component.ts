@@ -13,6 +13,8 @@ export class AppComponent {
 
     title = 'NinJo Recipe Manager';
 
+    isCollapsed: boolean = false;
+
     constructor(private accountService: AccountService) { }
 
     isLoggedIn(): boolean {

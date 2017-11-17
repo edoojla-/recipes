@@ -12,7 +12,7 @@ export class RecipeService {
     constructor(private httpClient: HttpClient) {
     }
 
-    getRecipes(): Observable<Recipe[]> {
+    getRecipes(): Observable<any> {
         return this.httpClient
             .get('/api/recipe/');
     }

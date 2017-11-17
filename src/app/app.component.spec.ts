@@ -41,9 +41,9 @@ describe('AppComponent', () => {
         expect(comp.title).toEqual('NinJo Recipe Manager');
     }));
 
-    it('should render title in a h1 tag', async(() => {
+    it('should render title in a a.navbar-brand tag', async(() => {
         fixture.detectChanges();
-        let debugElement = fixture.debugElement.query(By.css('h1'));
+        let debugElement = fixture.debugElement.query(By.css('a.navbar-brand'));
         let compiledElement = debugElement.nativeElement;
         expect(compiledElement.textContent).toContain('NinJo Recipe Manager');
     }));

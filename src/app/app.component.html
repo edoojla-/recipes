@@ -1,21 +1,35 @@
 <div class="container">
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a routerLink="/dashboard" *ngIf="isLoggedIn()" routerLinkActive="active">Dashboard</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <a class="navbar-brand" href="#">{{title}}</a>
+
+        <button (click)="isCollapsed = !isCollapsed"
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div [collapse]="isCollapsed"
+             class="collapse navbar-collapse"
+             id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li *ngIf="isLoggedIn()">
+                    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
                 </li>
-                <!--<a routerLink="/heroes" routerLinkActive="active">Heroes</a>-->
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="navbar-nav">
                 <li>
                     <a routerLink="/" *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
                 </li>
             </ul>
         </div>
-    </nav>
 
-    <h1>{{title}}</h1>
+    </nav>
 
     <div>
         <router-outlet></router-outlet>

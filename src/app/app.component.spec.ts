@@ -3,7 +3,6 @@
 import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {Http} from '@angular/http';
 import {AppComponent} from './app.component';
 import {AccountService} from './services/account.service';
 
@@ -19,7 +18,6 @@ describe('AppComponent', () => {
                 AppComponent
             ],
             providers: [
-                Http,
                 {provide: AccountService, useClass: MockAccountService}
             ],
             imports: [],

@@ -1,65 +1,56 @@
 import {TestBed, inject, async} from '@angular/core/testing';
-import {HttpModule, Http, BaseRequestOptions, Response, ResponseOptions} from '@angular/http';
-import {MockBackend} from '@angular/http/testing';
+import {HttpClient} from '@angular/common/http';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RecipeService} from './recipe.service';
 import {Observable} from 'rxjs/Observable';
-
-const mockHttpProvider =
-    {
-        provide: Http,
-        deps: [MockBackend, BaseRequestOptions],
-        useFactory: (backend: MockBackend, defaultOptions: BaseRequestOptions) => {
-            return new Http(backend, defaultOptions);
-        }
-    };
 
 describe("RecipeService", () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [HttpModule],
+            imports: [HttpClientTestingModule],
             declarations: [],
             providers: [
-                RecipeService,
-                MockBackend,
-                BaseRequestOptions,
-                mockHttpProvider
+                RecipeService
             ]
         });
         TestBed.compileComponents();
     });
 
-    it('should return an Observable<Array<Recipe>>',
-        async(inject([RecipeService, MockBackend], (recipeService, mockBackend) => {
+    describe("getRecipes()", () => {
 
-            const mockResponse = {
-                data: [
-                    {id: 0, name: 'Recipe 0'},
-                    {id: 1, name: 'Recipe 1'},
-                    {id: 2, name: 'Recipe 2'},
-                    {id: 3, name: 'Recipe 3'},
-                ]
-            };
+        it('should make a request to /api/recipe/ and return its mock',
+            async(inject([RecipeService, HttpTestingController], (recipeService, httpTestingController) => {
 
-            mockBackend.connections.subscribe((connection) => {
-                connection.mockRespond(new Response(new ResponseOptions({
-                    body: JSON.stringify(mockResponse)
-                })));
-            });
+                const mockResponse = {
+                    data: [
+                        {id: 0, name: 'Recipe 0'},
+                        {id: 1, name: 'Recipe 1'},
+                        {id: 2, name: 'Recipe 2'},
+                        {id: 3, name: 'Recipe 3'},
+                    ]
+                };
 
-            recipeService.getRecipes().subscribe(
-                data => {
-                    expect(data.data.length).toBe(4);
-                }
-            );
-        }))
-    );
+                recipeService.getRecipes().subscribe(
+                    recipes => {
+                        expect(recipes).toEqual(mockResponse);
+                    }
+                );
 
-    it('should call get',
-        inject([RecipeService, Http], (recipeService, http) => {
-            let obs = new Observable();
-            http.get = jasmine.createSpy("get() spy").and.returnValue(obs);
-            recipeService.getRecipes();
-            expect(http.get).toHaveBeenCalled();
-        })
-    );
+                let recipeRequest = httpTestingController.expectOne('/api/recipe/');
+                recipeRequest.flush(mockResponse);
+
+                httpTestingController.verify();
+            }))
+        );
+
+        it('should call get',
+            inject([RecipeService, HttpClient], (recipeService, httpClient) => {
+                let obs = new Observable();
+                httpClient.get = jasmine.createSpy("get() spy").and.returnValue(obs);
+                recipeService.getRecipes();
+                expect(httpClient.get).toHaveBeenCalled();
+            })
+        );
+
+    });
 });

@@ -25,7 +25,8 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm test:watch` to execute the unit tests via [Karma](https://karma-runner.github.io). The tests will automatically rerun if you change any of the source files.<br />
+Run `npm test` to execute unit tests one single time. This is suitable for CI.
 
 ## Running end-to-end tests
 

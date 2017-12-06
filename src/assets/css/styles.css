@@ -22,6 +22,20 @@ my-dashboard table a {
     padding: 6px 12px;
 }
 
-my-recipe-ingredients span.glyphicon {
+button {
     cursor: pointer;
+}
+
+my-recipe-ingredients {
+    display: block;
+}
+
+my-recipe-ingredients span[octicon] {
+    cursor: pointer;
+}
+
+@media (max-width: 575px) {
+    my-recipe-ingredients {
+        margin-top: 60px;
+    }
 }

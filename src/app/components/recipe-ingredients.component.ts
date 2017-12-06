@@ -1,11 +1,10 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import {RecipeIngredientService} from '../services/recipe-ingredient.service';
 import {RecipeIngredient} from '../models/recipe-ingredient'
 import {IngredientService} from '../services/ingredient.service';
-import {Ingredient} from '../models/ingredient'
+import {Ingredient} from '../models/ingredient';
 
 @Component({
     selector: 'my-recipe-ingredients',

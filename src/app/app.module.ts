@@ -17,6 +17,7 @@ import {LoginComponent} from './components/login.component';
 import {DashboardComponent} from './components/dashboard.component';
 import {RecipeComponent} from './components/recipe.component';
 import {RecipeIngredientsComponent} from './components/recipe-ingredients.component';
+import {OcticonDirective} from './directives/octicon.directive';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import {RecipeIngredientsComponent} from './components/recipe-ingredients.compon
         LoginComponent,
         DashboardComponent,
         RecipeComponent,
-        RecipeIngredientsComponent
+        RecipeIngredientsComponent,
+        OcticonDirective
     ],
     imports: [
         BrowserModule,

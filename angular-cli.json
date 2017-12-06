@@ -19,6 +19,7 @@
             "mobile": false,
             "styles": [
                 "assets/css/styles.css",
+                "../node_modules/octicons/build/build.css",
                 "../node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [],

@@ -1,7 +1,11 @@
-<h4>Ingredients</h4>
-
 <form [formGroup]="recipeIngredientsForm"
       (ngSubmit)="saveRecipeIngredient(recipeIngredientsForm.value, recipeIngredientsForm.valid)">
+
+    <div class="form-row form-group">
+        <label class="col col-form-label">Ingredients</label>
+        <!-- Unused input field for layout alignment purposes --><input disabled type="text" class="invisible col form-control ">
+    </div>
+
     <div class="form-row form-group">
 
         <div class="col suggest-input-group">
@@ -41,7 +45,7 @@
 </form>
 
 
-<div style="margin-top: 40px">
+<div class="mt-5">
     <table class="table table-striped">
         <tr *ngFor="let recipeIngredient of recipeIngredients">
             <td>

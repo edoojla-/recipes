@@ -13,7 +13,7 @@ export class AppComponent {
 
     title = 'NinJo Recipe Manager';
 
-    isCollapsed: boolean = false;
+    isCollapsed: boolean = true;
 
     constructor(private accountService: AccountService) { }
 
